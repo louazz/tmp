@@ -1,5 +1,6 @@
 package com.temenos.t24;
 
+import kong.unirest.Empty;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
@@ -45,8 +46,8 @@ public class AppTest {
     }
 
     public String KycGet(String url, String apikey) {
-        HttpResponse<JsonNode> jsonResponse = Unirest.get(url).header("accept", "application/json")
-                .queryString("apikey", apikey).asJson();
+        HttpResponse<String> jsonResponse = Unirest.get(url)
+                .queryString("apikey", apikey).asString();
         System.out.println(jsonResponse.getBody());
         System.out.println(jsonResponse.getStatus());
         return jsonResponse.getBody().toString();
