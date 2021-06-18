@@ -1,4 +1,4 @@
-package com.example;
+package com.temenos.t24;
 
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;

@@ -1,4 +1,4 @@
-package com.example;
+package com.temenos.t24;
 
 /**
  * Hello world!
