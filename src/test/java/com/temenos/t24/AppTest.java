@@ -13,12 +13,12 @@ public class AppTest {
     private String action;
     private String key;
     private String body;
-    public AppTest(String[] args) {
-     String[] tmp= args[0].split("#");
+    public AppTest(String args) {
+     String[] tmp= args.split("#");
      this.url= tmp[0];
      this.action=tmp[1];
      this.key=tmp[2];
-     if(tmp[3]!= null){
+     if(this.action =="ADD"){
         this.body=tmp[3];
      }
     
@@ -36,13 +36,13 @@ public class AppTest {
         return this.url;
     }
     public static void main(String[] args) {
-       AppTest entity= new AppTest(args) ;
+       AppTest entity= new AppTest(args[0]) ;
+      
        if(entity.getAction()=="ADD"){
           System.out.println(entity.KycAdd(entity.getURL(), entity.getBody(), entity.getKey()));
        }else{
          System.out.println( entity.KycGet(entity.getURL(), entity.getKey()));
        }
-        
     }
 
     public String KycGet(String url, String apikey) {
