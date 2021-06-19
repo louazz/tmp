@@ -1,8 +1,5 @@
 package com.temenos.t24;
-
-
 import kong.unirest.HttpResponse;
-
 import kong.unirest.Unirest;
 
 /**
@@ -13,7 +10,7 @@ public class AppTest {
     private String action;
     private String key;
     private String body;
-    public AppTest(String args) {
+  /*  public AppTest(String args) {
      String[] tmp= args.split("#");
      this.url= tmp[0];
      this.action=tmp[1];
@@ -22,7 +19,7 @@ public class AppTest {
         this.body=tmp[3];
      }
     
-    }
+    }*/
     public  String getAction(){
         return this.action;
     }
@@ -36,13 +33,29 @@ public class AppTest {
         return this.url;
     }
     public static void main(String[] args) {
-       AppTest entity= new AppTest(args[0]) ;
+    /*   AppTest entity= new AppTest(args[0]) ;
       
        if(entity.getAction()=="ADD"){
           System.out.println(entity.KycAdd(entity.getURL(), entity.getBody(), entity.getKey()));
        }else{
          System.out.println( entity.KycGet(entity.getURL(), entity.getKey()));
-       }
+       }*/
+    }
+    public String checker(String trame){
+        String[] tmp= trame.split("#");
+        this.url= tmp[0];
+        this.action=tmp[1];
+        this.key=tmp[2];
+        if(this.action =="GET"){  
+           String result= KycGet(getURL(), getKey());
+           System.out.println(result);
+           return result;
+        }else{
+            this.body=tmp[3];
+            String result= KycAdd(getURL(), getBody(), getKey());
+            System.out.println(result);
+            return result;
+        }
     }
 
     public String KycGet(String url, String apikey) {
