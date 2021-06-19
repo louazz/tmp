@@ -33,6 +33,7 @@ public class AppTest {
         return this.url;
     }
     public static void main(String[] args) {
+        
     /*   AppTest entity= new AppTest(args[0]) ;
       
        if(entity.getAction()=="ADD"){
@@ -42,10 +43,12 @@ public class AppTest {
        }*/
     }
     public String checker(String trame){
+        System.out.println("We are checking...");
         String[] tmp= trame.split("#");
         this.url= tmp[0];
         this.action=tmp[1];
         this.key=tmp[2];
+        System.out.println("We splitted the String");
         if(this.action =="GET"){  
            String result= KycGet(getURL(), getKey());
            System.out.println(result);
@@ -59,6 +62,7 @@ public class AppTest {
     }
 
     public String KycGet(String url, String apikey) {
+        System.out.println("We are getting KYC info");
         HttpResponse<String> jsonResponse = Unirest.get(url)
                 .queryString("apikey", apikey).asString();
         System.out.println(jsonResponse.getBody());
@@ -67,6 +71,7 @@ public class AppTest {
     }
 
     public String KycAdd(String url, String body, String apikey) {
+        System.out.println("We are adding KYC");
         HttpResponse<String> stringResponse = Unirest.post(url).header("accept", "text/xml")
                 .queryString("apikey", apikey).body(body).asString();
                 System.out.println(stringResponse.getStatus());
