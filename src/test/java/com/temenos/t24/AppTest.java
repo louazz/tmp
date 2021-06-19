@@ -41,7 +41,7 @@ public class AppTest {
 
     public static void main(String[] args) throws IOException {
         AppTest entity = new AppTest();
-        System.out.println(entity.KycGet("http://httpbin.org#GET#hello"));
+        System.out.println(entity.KycGet("http://10.150.105.16:8999/WSManager/api/kyc/riskscore/getLatestRiskScore?clientKey=10025277&zoneId=51#GET#0ba988df-7ec3-4ff7-b6ca-61f0edf2cffd"));
 
         /*
          * AppTest entity= new AppTest(args[0]) ;
@@ -54,6 +54,7 @@ public class AppTest {
     }
 
     public String checker(String trame) throws IOException {
+        System.out.println(KycGet(trame));
         System.out.println("We are checking...");
         String[] tmp = trame.split("#");
         this.url = tmp[0];
