@@ -41,7 +41,7 @@ public class AppTest {
 
     public static void main(String[] args) throws IOException {
         AppTest entity = new AppTest();
-        System.out.println(entity.KycGet("http://10.150.105.16:8999/WSManager/api/kyc/riskscore/getLatestRiskScore?clientKey=10025277&zoneId=51#GET#0ba988df-7ec3-4ff7-b6ca-61f0edf2cffd"));
+        System.out.println(entity.KycGet("http://10.150.105.16:8999/WSManager/api/kyc/riskscore/getLatestRiskScore?clientKey=&zoneId=#GET#0b"));
 
         /*
          * AppTest entity= new AppTest(args[0]) ;
