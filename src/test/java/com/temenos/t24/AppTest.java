@@ -40,10 +40,10 @@ public class AppTest {
     }
 
     public static void main(String[] args) throws IOException {
-        /*  AppTest entity = new AppTest();
-        System.out.println(entity.checker("jjj#GET#1222"));
+        AppTest entity = new AppTest();
+        System.out.println(entity.KycGet("http://httpbin.org#GET#hello"));
 
-      
+        /*
          * AppTest entity= new AppTest(args[0]) ;
          * 
          * if(entity.getAction()=="ADD"){
@@ -68,7 +68,7 @@ public class AppTest {
             connection.setRequestMethod("GET");
             String apiKey = this.key;
             System.out.println("Your key: "+apiKey);
-            connection.setRequestProperty("x-apikey", "apikey:"+apiKey);
+            connection.setRequestProperty("apikey", apiKey);
             System.out.println(connection.getResponseCode());
             return connection.getResponseMessage();
         } else {
@@ -80,15 +80,19 @@ public class AppTest {
         }
     }
 
-    public String KycGet(String trame) throws IOException {
-        String[] tmp = trame.split("#");
+    public int KycGet(String trame) throws IOException {
+      String[] tmp = trame.split("#");
         this.url = tmp[0];
         this.key = tmp[2];
         System.out.println("We are getting KYC info");
-        HttpResponse<String> jsonResponse = Unirest.get(this.url).queryString("apikey", this.key).asString();
+         /* HttpResponse<String> jsonResponse = Unirest.get(this.url).queryString("apikey", this.key).asString();
         System.out.println(jsonResponse.getBody());
         System.out.println(jsonResponse.getStatus());
-        return jsonResponse.getBody().toString();
+        return jsonResponse.getBody().toString();*/
+        return Unirest.get(this.url)
+        .header("apikey", this.key)
+        .asString()
+        .getStatus();
     }
 
     public String KycAdd(String url, String body, String apikey) {
