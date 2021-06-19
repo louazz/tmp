@@ -67,7 +67,8 @@ public class AppTest {
             HttpURLConnection connection = (HttpURLConnection) urlcon.openConnection();
             connection.setRequestMethod("GET");
             String apiKey = this.key;
-            connection.setRequestProperty("apikey", apiKey);
+            System.out.println("Your key: "+apiKey);
+            connection.setRequestProperty("x-apikey", "apikey:"+apiKey);
             System.out.println(connection.getResponseCode());
             return connection.getResponseMessage();
         } else {
@@ -79,10 +80,12 @@ public class AppTest {
         }
     }
 
-    public String KycGet(String url, String apikey) throws IOException {
-
+    public String KycGet(String trame) throws IOException {
+        String[] tmp = trame.split("#");
+        this.url = tmp[0];
+        this.key = tmp[2];
         System.out.println("We are getting KYC info");
-        HttpResponse<String> jsonResponse = Unirest.get(url).queryString("apikey", apikey).asString();
+        HttpResponse<String> jsonResponse = Unirest.get(this.url).queryString("apikey", this.key).asString();
         System.out.println(jsonResponse.getBody());
         System.out.println(jsonResponse.getStatus());
         return jsonResponse.getBody().toString();
