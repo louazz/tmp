@@ -1,4 +1,6 @@
 package com.temenos.t24;
+import java.io.IOException;
+
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 
@@ -50,9 +52,11 @@ public class AppTest {
         this.key=tmp[2];
         System.out.println("We splitted the String");
         if(this.action =="GET"){  
-           String result= KycGet(getURL(), getKey());
-           System.out.println(result);
-           return result;
+            System.out.println("We are getting KYC info");
+            HttpResponse<String> Response = Unirest.get(this.url)
+            .queryString("apikey", this.key).asString();
+            System.out.println("The result is:"+Response.getBody()+"  the status code is: "+ Response.getStatus());
+           return Response.getBody();
         }else{
             this.body=tmp[3];
             String result= KycAdd(getURL(), getBody(), getKey());
@@ -61,7 +65,8 @@ public class AppTest {
         }
     }
 
-    public String KycGet(String url, String apikey) {
+    public String KycGet(String url, String apikey) throws IOException {
+        
         System.out.println("We are getting KYC info");
         HttpResponse<String> jsonResponse = Unirest.get(url)
                 .queryString("apikey", apikey).asString();
